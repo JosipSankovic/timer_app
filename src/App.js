@@ -29,7 +29,7 @@ export default function App(){
     
     return(
         <>
-        <button onClick={StartProject}>{btnStartStop}</button>
+        <button className="startBtn" onClick={StartProject}>{btnStartStop}</button>
         <ProjectList list={projectList}/>
         <ModalDialog projectEnd={()=>{projectEnd()}} hideModal={()=>setShowModal(false)} show={showModal} thisProjectId={projectId} />
         

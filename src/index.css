@@ -20,3 +20,10 @@ code {
     position: relative;
     flex-direction: column;
 }
+.startBtn{
+  border-radius: 10px;
+  height: 10vh;
+  right: 3px;
+  width: 12vw;
+  margin-top: 2px;
+}
