@@ -1,8 +1,10 @@
-import React from "react";
+import {useRef} from "react";
 import "./styles/ProjectList.css";
+import { DownloadTableExcel } from 'react-export-table-to-excel';
 
 export default function ProjectList(props){
     const allProjects=[];
+    const tableRef=useRef(null);
     
     if(props.list!=null){
         props.list.forEach(x => {
@@ -35,7 +37,7 @@ export default function ProjectList(props){
         });
         return(
             <>
-            <table>
+            <table ref={tableRef}>
                 <thead>
                     <tr>
                         <th>Project</th>
@@ -46,8 +48,15 @@ export default function ProjectList(props){
                 </thead>
                 <tbody>
                     {allProjects}
+                    <tr>
+                    
+                    </tr>
                 </tbody>
             </table>
+            <DownloadTableExcel filename="Project_timer" sheet="Projects" currentTableRef={tableRef.current}>
+    <button> Export excel </button>
+    </DownloadTableExcel>
+
             </>
         )
     }
