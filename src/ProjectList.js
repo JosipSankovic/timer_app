@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/ProjectList.css";
 
 export default function ProjectList(props){
     const allProjects=[];
