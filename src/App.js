@@ -40,12 +40,15 @@ export default function App(){
     function getDateTime(){
         let newDate = new Date()
         let date = newDate.getDate();
+        if(date<10)date="0"+date;
         let month = newDate.getMonth()+1;
+        if(month<10)month="0"+month;
         let year = newDate.getFullYear();
         let hour=newDate.getHours();
+        if(hour<10)hour="0"+hour;
         let minute=newDate.getMinutes();
-        let seconds=newDate.getSeconds();
-        return year+"-"+month+"-"+date+"T"+hour+":"+minute+":"+seconds+".000Z";
+        if(minute<10)minute="0"+minute;
+        return year+"-"+month+"-"+date+"T"+hour+":"+minute+":00.000Z";
     }
     
     function getAllProjects(){

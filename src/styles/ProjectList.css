@@ -13,3 +13,15 @@ th {
   background-color:#b8b7b6;
   color: white;
 }
+td{
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.exportBtn{
+  border-radius: 10px;
+  height: 70px;
+  width: 100px;
+  margin-top: 10px;
+
+}
