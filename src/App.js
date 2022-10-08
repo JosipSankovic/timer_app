@@ -30,7 +30,7 @@ export default function App(){
     return(
         <>
         <button className="startBtn" onClick={StartProject}>{btnStartStop}</button>
-        <ProjectList list={projectList}/>
+        <ProjectList projectDeleted={(projectId)=>projectDeleted(projectId)} list={projectList}/>
         <ModalDialog projectEnd={()=>{projectEnd()}} hideModal={()=>setShowModal(false)} show={showModal} thisProjectId={projectId} />
         
         </>
@@ -79,6 +79,7 @@ export default function App(){
         form.append("projectName","Project");
         form.append("projectStart",getDateTime());
 
+        console.log(form.keys);
 
          createAPIEndpoint().create(form).then(res=>{
             getAllProjects();
@@ -94,6 +95,15 @@ export default function App(){
         setBtn("Start");
         setStart(false);
         getAllProjects();
+    }
+    function projectDeleted(deleteId){
+        
+        if(deleteId===projectId){
+            projectEnd();
+        }
+        else{
+            getAllProjects();
+        }
     }
 
     

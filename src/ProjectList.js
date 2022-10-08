@@ -1,6 +1,7 @@
 import {useRef} from "react";
 import "./styles/ProjectList.css";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
+import { createAPIEndpoint } from "./api";
 
 export default function ProjectList(props){
     const allProjects=[];
@@ -9,9 +10,7 @@ export default function ProjectList(props){
     if(props.list!=null){
         props.list.forEach(x => {
             var stop="";
-            if(x.projectStop==null){
-                var Stop="...";
-            }else{
+            if(x.projectStop!=null){
                 var projectStop=new Date(x.projectStop);
                 stop=projectStop.getDay()+"."+projectStop.getMonth()+"."+projectStop.getFullYear()+" "+ projectStop.getHours()+":"+projectStop.getMinutes()
             }
@@ -30,11 +29,16 @@ export default function ProjectList(props){
                 <td>
                     {x.duration}
                 </td>
+                <td>
+                    <p className="deleteBtn" onClick={()=>{ deleteProject(x.projectId)}}>Delete</p>
+                </td>
                 
             </tr>
             )
             
         });
+
+
         return(
             <>
             <table ref={tableRef}>
@@ -44,6 +48,7 @@ export default function ProjectList(props){
                         <th>Start</th>
                         <th>Stop</th>
                         <th>Duration</th>
+                        <th>Delete project</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,11 +59,19 @@ export default function ProjectList(props){
                 </tbody>
             </table>
             <DownloadTableExcel filename="Project_timer" sheet="Projects" currentTableRef={tableRef.current}>
-    <button> Export excel </button>
+    <button className="exportBtn"> Export excel </button>
     </DownloadTableExcel>
 
             </>
         )
+    }
+
+    function deleteProject(projectId){
+
+        createAPIEndpoint().delete(projectId).then(res=>{
+            props.projectDeleted(projectId);
+
+        }).catch(res=>console.log(res))
     }
     
     

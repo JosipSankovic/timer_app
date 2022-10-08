@@ -5,7 +5,6 @@ export default function ModalDialog(props){
 
 const [inputProjectName,setInputProjectName]=useState("");
 let thisProject=new FormData();
-console.log(props.thisProjectId);
 
     if(props.show===false){
         return(null);
@@ -46,14 +45,14 @@ console.log(props.thisProjectId);
         
     
         createAPIEndpoint().update(thisProject).then(res=>{
-          console.log(res);
+
           props.projectEnd();
           thisProject.delete("projectStop");
             thisProject.delete("projectName");
             thisProject.delete("projectId");
             setInputProjectName("");
         }).catch(res=>{
-            console.log(res);
+
             thisProject.delete("projectStop");
             thisProject.delete("projectName");
             thisProject.delete("projectId");
